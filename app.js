@@ -1,4 +1,4 @@
-var ws = require('ws');
+var WebSocket = require('ws');
 
 const ws = new WebSocket('ws://54.203.235.138:3000/bvh_server');
 
