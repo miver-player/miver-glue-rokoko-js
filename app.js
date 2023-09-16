@@ -1,25 +1,31 @@
 var WebSocket = require('ws');
 var wsurl = "ws://54.203.235.138:3000/bvh_server";
-var ws = new WebSocket(wsurl);
 
 
-ws.on('open', function open() {
-  ws.send("connected");
-});
+function connect() {
+    var ws = new WebSocket(wsurl);
+    ws.onopen = function() {
 
-// reconnect on close
-
-ws.on('close', function close() {
-    console.log('disconnected');
-    ws = new WebSocket(wsurl);
-});
-
-ws.on('error', function error() {
-    console.log('disconnected');
-    ws = new WebSocket(wsurl);
-});
-
-
+    };
+  
+    ws.onmessage = function(e) {
+      console.log('Message:', e.data);
+    };
+  
+    ws.onclose = function(e) {
+      console.log('Socket is closed. Reconnect will be attempted in 1 second.', e.reason);
+      setTimeout(function() {
+        connect();
+      }, 1000);
+    };
+  
+    ws.onerror = function(err) {
+      console.error('Socket encountered error: ', err.message, 'Closing socket');
+      ws.close();
+    };
+}
+  
+connect();
 
 
 var dgram = require("dgram");
