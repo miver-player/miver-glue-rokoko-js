@@ -20,7 +20,8 @@ udpServer.on("error", function (err) {
 
 udpServer.on("message", function (msg, rinfo) {
     console.log("udpServer got: " + msg + " from " + rinfo.address + ":" + rinfo.port + "\n");
-    ws.send(msg);
+    // if ws is open, send msg
+    if (ws.readyState === WebSocket.OPEN) ws.send(msg);
     //var x = msg.toString().trim().split(" ").join(" ");
     //console.log(JSON.parse(msg).scene.actors);
     }
