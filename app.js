@@ -1,4 +1,4 @@
-import WebSocket from 'ws';
+var ws = require('ws');
 
 const ws = new WebSocket('ws://54.203.235.138:3000/bvh_server');
 
