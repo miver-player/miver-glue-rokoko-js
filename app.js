@@ -1,6 +1,6 @@
 var WebSocket = require('ws');
 var wsurl = "ws://54.203.235.138:3000/bvh_server";
-
+var ws = null;
 
 function connect() {
     var ws = new WebSocket(wsurl);
@@ -40,7 +40,7 @@ udpServer.on("error", function (err) {
 udpServer.on("message", function (msg, rinfo) {
     console.log("udpServer got: " + msg + " from " + rinfo.address + ":" + rinfo.port + "\n");
     // if ws is open, send msg
-    if (ws.readyState === WebSocket.OPEN) ws.send(msg);
+    if (ws && ws.readyState === WebSocket.OPEN) ws.send(msg);
     //var x = msg.toString().trim().split(" ").join(" ");
     //console.log(JSON.parse(msg).scene.actors);
     }
