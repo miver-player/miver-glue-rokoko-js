@@ -1,6 +1,6 @@
 var WebSocket = require('ws');
 var wsurl = "ws://54.203.235.138:3000/bvh_server";
-const ws = new WebSocket(wsurl);
+var ws = new WebSocket(wsurl);
 
 ws.on('error', console.error);
 
