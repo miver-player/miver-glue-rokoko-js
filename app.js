@@ -1,12 +1,20 @@
 var WebSocket = require('ws');
-
-const ws = new WebSocket('ws://54.203.235.138:3000/bvh_server');
+var wsurl = "ws://54.203.235.138:3000/bvh_server";
+const ws = new WebSocket(wsurl);
 
 ws.on('error', console.error);
 
 ws.on('open', function open() {
   ws.send("connected");
 });
+
+// reconnect on close
+
+ws.on('close', function close() {
+    console.log('disconnected');
+    ws = new WebSocket(wsurl);
+});
+
 
 
 var dgram = require("dgram");
