@@ -1,5 +1,5 @@
 var WebSocket = require('ws');
-var wsurl = "ws://54.203.235.138:3000/bvh_server";
+var wsurl = "ws://54.203.235.138:4000/bvh_server";
 var ws = null;
 
 function connect() {
